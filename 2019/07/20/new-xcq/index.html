@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="L6Lm9d5Crl">
+  
+  
+  
+  
+  <title>二叉树，平衡树，红黑树的区别 | 小善缘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="红黑树算是很难的一种数据结构吧，一般很少考察插入、删除等具体操作步骤，如果遇到要你手写红黑树的面试官，就直接告辞吧。所以，更多是会考察你对红黑树的理解程度，考察的最多的估计就是为什么有了二查找查找树/平衡树还需要红黑树这个问题了，今天，你只需要花一分钟的时间，就知道怎么回答这个问题了。  1. 二叉查找树的缺点二叉查找树，相信大家都接触过，二叉查找树的特点就是左子树的节点值比父亲节点小，而右子树的">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树，平衡树，红黑树的区别">
+<meta property="og:url" content="https://xiaoshanyuan.github.io/2019/07/20/new-xcq/index.html">
+<meta property="og:site_name" content="小善缘">
+<meta property="og:description" content="红黑树算是很难的一种数据结构吧，一般很少考察插入、删除等具体操作步骤，如果遇到要你手写红黑树的面试官，就直接告辞吧。所以，更多是会考察你对红黑树的理解程度，考察的最多的估计就是为什么有了二查找查找树/平衡树还需要红黑树这个问题了，今天，你只需要花一分钟的时间，就知道怎么回答这个问题了。  1. 二叉查找树的缺点二叉查找树，相信大家都接触过，二叉查找树的特点就是左子树的节点值比父亲节点小，而右子树的">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://xiaoshanyuan.github.io/img/erchashu-1.jpg">
+<meta property="og:image" content="https://xiaoshanyuan.github.io/img/erchashu-2.jpg">
+<meta property="og:image" content="https://xiaoshanyuan.github.io/img/pinghengshu-1.jpg">
+<meta property="og:image" content="https://xiaoshanyuan.github.io/img/pinghengshu-2.jpg">
+<meta property="og:image" content="https://xiaoshanyuan.github.io/img/hongheishu.jpg">
+<meta property="og:updated_time" content="2019-07-21T07:51:08.819Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二叉树，平衡树，红黑树的区别">
+<meta name="twitter:description" content="红黑树算是很难的一种数据结构吧，一般很少考察插入、删除等具体操作步骤，如果遇到要你手写红黑树的面试官，就直接告辞吧。所以，更多是会考察你对红黑树的理解程度，考察的最多的估计就是为什么有了二查找查找树/平衡树还需要红黑树这个问题了，今天，你只需要花一分钟的时间，就知道怎么回答这个问题了。  1. 二叉查找树的缺点二叉查找树，相信大家都接触过，二叉查找树的特点就是左子树的节点值比父亲节点小，而右子树的">
+<meta name="twitter:image" content="https://xiaoshanyuan.github.io/img/erchashu-1.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="小善缘" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/xiaohai.jpg">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: false,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+        <a href="/" class="profilepic">
+            
+            <img src="/img/xiaohai.jpg" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
+            
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">小善缘</a></h1>
+        </hgroup>
+        
+        <p class="header-subtitle">有梦为马，随处可栖</p>
+        
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a  href="/categories/技术博客">技术博客</a></li>
+                        
+                            <li><a  href="/categories/随笔文章">随笔文章</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/静心/" style="font-size: 10px;">静心</a>
+                    </div>
+                </section>
+                
+                
+                
+            </div>
+        </div>
+    </header>
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">小善缘</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img src="/img/xiaohai.jpg" class="js-avatar" style="width: 100%; height: 100%; opacity: 1;">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">小善缘</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">有梦为马，随处可栖</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/categories/技术博客">技术博客</a></li>
+                
+                    <li><a href="/categories/随笔文章">随笔文章</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                </div>
+            </nav>
+        </header>
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-new-xcq" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a  href="/2019/07/20/new-xcq/" class="article-date">
+      <time datetime="2019-07-20T09:21:58.000Z" itemprop="datePublished">2019-07-20</time>
+</a>
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      二叉树，平衡树，红黑树的区别
+    </h1>
+  
+
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术博客/">技术博客</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>红黑树算是很难的一种数据结构吧，一般很少考察插入、删除等具体操作步骤，如果遇到要你手写红黑树的面试官，就直接告辞吧。所以，更多是会考察你对红黑树的理解程度，考察的最多的估计就是为什么有了二查找查找树/平衡树还需要红黑树这个问题了，今天，你只需要花一分钟的时间，就知道怎么回答这个问题了。</p>
+<hr>
+<h4 id="1-二叉查找树的缺点"><a href="#1-二叉查找树的缺点" class="headerlink" title="1. 二叉查找树的缺点"></a>1. 二叉查找树的缺点</h4><p>二叉查找树，相信大家都接触过，二叉查找树的特点就是左子树的节点值比父亲节点小，而右子树的节点值比父亲节点大，如图<br><img src="/img/erchashu-1.jpg" alt="二叉树-1"></p>
+<p>基于二叉查找树的这种特点，我们在查找某个节点的时候，可以采取类似于二分查找的思想，快速找到某个节点。n 个节点的二叉查找树，正常的情况下，查找的时间复杂度为 O（logn）。</p>
+<p>之所以说是正常情况下，是因为二叉查找树有可能出现一种极端的情况，例如<br><img src="/img/erchashu-2.jpg" alt="二叉树-2"></p>
+<p>这种情况也是满足二叉查找树的条件，然而，此时的二叉查找树已经近似退化为一条链表，这样的二叉查找树的查找时间复杂度顿时变成了 O(n)，可想而知，我们必须不能让这种情况发生，为了解决这个问题，于是我们引申出了平衡二叉树。</p>
+<h4 id="2-平衡二叉树"><a href="#2-平衡二叉树" class="headerlink" title="2. 平衡二叉树"></a>2. 平衡二叉树</h4><p>平衡二叉树就是为了解决二叉查找树退化成一颗链表而诞生了，平衡树具有如下特点</p>
+<ol>
+<li>具有二叉查找树的全部特性。</li>
+<li>每个节点的左子树和右子树的高度差至多等于1。<br>例如：图一就是一颗平衡树了，而图二则不是(节点右边标的是这个节点的高度)</li>
+</ol>
+<p><img src="/img/pinghengshu-1.jpg" alt="平衡二叉树-图1"><br><img src="/img/pinghengshu-2.jpg" alt="平衡二叉树-图2"></p>
+<p>对于图二，因为节点9的左孩子高度为2，而右孩子高度为0。他们之间的差值超过1了。<br>平衡树基于这种特点就可以保证不会出现大量节点偏向于一边的情况了。关于平衡树如何构建、插入、删除、左旋、右旋等操作这里不在说明.</p>
+<p>于是，通过平衡树，我们解决了二叉查找树的缺点。对于有 n 个节点的平衡树，最坏的查找时间复杂度也为 O(logn)。</p>
+<h4 id="3-为什么有了平衡树还需要红黑树？"><a href="#3-为什么有了平衡树还需要红黑树？" class="headerlink" title="3. 为什么有了平衡树还需要红黑树？"></a>3. 为什么有了平衡树还需要红黑树？</h4><p>虽然平衡树解决了二叉查找树退化为近似链表的缺点，能够把查找时间控制在 O(logn)，不过却不是最佳的，因为平衡树要求每个节点的左子树和右子树的高度差至多等于1，这个要求实在是太严了，导致每次进行插入/删除节点的时候，几乎都会破坏平衡树的第二个规则，进而我们都需要通过左旋和右旋来进行调整，使之再次成为一颗符合要求的平衡树。</p>
+<p>显然，如果在那种插入、删除很频繁的场景中，平衡树需要频繁着进行调整，这会使平衡树的性能大打折扣，为了解决这个问题，于是有了红黑树，红黑树具有如下特点：</p>
+<p>1、具有二叉查找树的特点。</p>
+<p>2、根节点是黑色的；</p>
+<p>3、每个叶子节点都是黑色的空节点（NIL），也就是说，叶子节点不存数据。</p>
+<p>4、任何相邻的节点都不能同时为红色，也就是说，红色节点是被黑色节点隔开的。</p>
+<p>5、每个节点，从该节点到达其可达的叶子节点是所有路径，都包含相同数目的黑色节点。</p>
+<p>例如下面的图片（注意，图片中黑色的、空的叶子节点没有画出）（图片来自极客时间）<br><img src="/img/hongheishu.jpg" alt="红黑树"></p>
+<p>正是由于红黑树的这种特点，使得它能够在最坏情况下，也能在 O(logn) 的时间复杂度查找到某个节点。至于为什么就能够保证时间复杂度为 O(logn)，我这里就不细讲了，后面的文章可能会讲。</p>
+<p>不过，与平衡树不同的是，红黑树在插入、删除等操作，不会像平衡树那样，频繁着破坏红黑树的规则，所以不需要频繁着调整，这也是我们为什么大多数情况下使用红黑树的原因。</p>
+<p>不过，如果你要说，单单在查找方面的效率的话，平衡树比红黑树快。</p>
+<p>所以，我们也可以说，红黑树是一种不大严格的平衡树。也可以说是一个折中发方案。</p>
+<h4 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h4><p>所以，最后的答案是，平衡树是为了解决二叉查找树退化为链表的情况，而红黑树是为了解决平衡树在插入、删除等操作需要频繁调整的情况。</p>
+<p>不过，红黑树还有挺多其他的知识点可以考，例如红黑树有哪些应用场景？向集合容器中 HashMap，TreeMap 等，内部结构就用到了红黑树了。还有构建一棵节点个数为 n 的红黑树，时间复杂度是多少？红黑树与哈希表在不同应该场景的选择？红黑树有哪些性质？红黑树各种操作的时间复杂度是多少？</p>
+<p>如果你把这些都弄懂了，应该就差不多可以的了。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a  href="/2019/07/20/new-xcq/">二叉树，平衡树，红黑树的区别</a></p>
+        <p><span>文章作者:</span><a  href="/" title="访问 小善缘 的个人博客">小善缘</a></p>
+        <p><span>发布时间:</span>2019年07月20日 - 17时21分</p>
+        <p><span>最后更新:</span>2019年07月21日 - 15时51分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/07/20/new-xcq/" title="二叉树，平衡树，红黑树的区别">https://xiaoshanyuan.github.io/2019/07/20/new-xcq/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://xiaoshanyuan.github.io/2019/07/20/new-xcq/　　作者: 小善缘" title=""></span>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a  href="/2019/07/20/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-二叉查找树的缺点"><span class="toc-number">1.</span> <span class="toc-text">1. 二叉查找树的缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-平衡二叉树"><span class="toc-number">2.</span> <span class="toc-text">2. 平衡二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-为什么有了平衡树还需要红黑树？"><span class="toc-number">3.</span> <span class="toc-text">3. 为什么有了平衡树还需要红黑树？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、总结"><span class="toc-number">4.</span> <span class="toc-text">4、总结</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a  href="/2019/07/20/hello-world/" title="上一篇: Hello World">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a  href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/20/new-xcq/">二叉树，平衡树，红黑树的区别</a></li></ul>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+    <script>
+        $(".post-list").addClass("toc-article");
+        // $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 小善缘
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo &nbsp;&nbsp;</a><a href="https://github.com/maochunguang" target="_blank">Blog</a> by tommy
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >极客到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 1;
+            var backgroundimg = "url(/background/bg-" + backgroundnum +".jpg)";
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'xxxxx', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?xxxxxx";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
