@@ -17,14 +17,14 @@
 <meta property="og:site_name" content="小善缘">
 <meta property="og:description" content="绝大部分写业务的程序员，在实际开发中使用 Redis 的时候，只会 Set Value 和 Get Value 两个操作，对 Redis 整体缺乏一个认知。这里对 Redis 常见问题做一个总结，解决大家的知识盲点。 1、为什么使用 Redis在项目中使用 Redis，主要考虑两个角度：性能和并发。如果只是为了分布式锁这些其他功能，还有其他中间件 Zookpeer 等代替，并非一定要使用 Redi">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://xiaoshanyuan.github.io/img/redis-3.png">
+<meta property="og:image" content="https://xiaoshanyuan.github.io/img/redis-3.jpg">
 <meta property="og:image" content="https://xiaoshanyuan.github.io/img/redis-5.png">
 <meta property="og:image" content="https://xiaoshanyuan.github.io/img/redis-6.jpg">
-<meta property="og:updated_time" content="2019-07-22T14:47:38.701Z">
+<meta property="og:updated_time" content="2019-07-22T15:16:53.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么分布式一定要有Redis?">
 <meta name="twitter:description" content="绝大部分写业务的程序员，在实际开发中使用 Redis 的时候，只会 Set Value 和 Get Value 两个操作，对 Redis 整体缺乏一个认知。这里对 Redis 常见问题做一个总结，解决大家的知识盲点。 1、为什么使用 Redis在项目中使用 Redis，主要考虑两个角度：性能和并发。如果只是为了分布式锁这些其他功能，还有其他中间件 Zookpeer 等代替，并非一定要使用 Redi">
-<meta name="twitter:image" content="https://xiaoshanyuan.github.io/img/redis-3.png">
+<meta name="twitter:image" content="https://xiaoshanyuan.github.io/img/redis-3.jpg">
   
     <link rel="alternative" href="/atom.xml" title="小善缘" type="application/atom+xml">
   
@@ -219,7 +219,7 @@
           
         <p>绝大部分写业务的程序员，在实际开发中使用 Redis 的时候，只会 Set Value 和 Get Value 两个操作，对 Redis 整体缺乏一个认知。这里对 Redis 常见问题做一个总结，解决大家的知识盲点。</p>
 <h4 id="1、为什么使用-Redis"><a href="#1、为什么使用-Redis" class="headerlink" title="1、为什么使用 Redis"></a>1、为什么使用 Redis</h4><p>在项目中使用 Redis，主要考虑两个角度：性能和并发。如果只是为了分布式锁这些其他功能，还有其他中间件 Zookpeer 等代替，并非一定要使用 Redis。</p>
-<p>性能：<br>如下图所示，我们在碰到需要执行耗时特别久，且结果不频繁变动的 SQL，就特别适合将运行结果放入缓存。这样，后面的请求就去缓存中读取，使得请求能够迅速响应。<br><img src="/img/redis-3.png" alt="redis-3" title="redis-3"><br>根据交互效果的不同，响应时间没有固定标准。在理想状态下，我们的页面跳转需要在瞬间解决，对于页内操作则需要在刹那间解决。</p>
+<p>性能：<br>如下图所示，我们在碰到需要执行耗时特别久，且结果不频繁变动的 SQL，就特别适合将运行结果放入缓存。这样，后面的请求就去缓存中读取，使得请求能够迅速响应。<br><img src="/img/redis-3.jpg" alt="redis-3" title="redis-3"><br>根据交互效果的不同，响应时间没有固定标准。在理想状态下，我们的页面跳转需要在瞬间解决，对于页内操作则需要在刹那间解决。</p>
 <p>并发：<br>如下图所示，在大并发的情况下，所有的请求直接访问数据库，数据库会出现连接异常。这个时候，就需要使用 Redis 做一个缓冲操作，让请求先访问到 Redis，而不是直接访问数据库。<br><img src="/img/redis-5.png" alt="redis-4" title="redis-4"><br>使用 Redis 的常见问题<br>缓存和数据库双写一致性问题<br>缓存雪崩问题<br>缓存击穿问题<br>缓存的并发竞争问题</p>
 <h4 id="2、单线程的-Redis-为什么这么快"><a href="#2、单线程的-Redis-为什么这么快" class="headerlink" title="2、单线程的 Redis 为什么这么快"></a>2、单线程的 Redis 为什么这么快</h4><p>这个问题是对 Redis 内部机制的一个考察。很多人都不知道 Redis 是单线程工作模型。</p>
 <p>原因主要是以下三点：<br>纯内存操作<br>单线程操作，避免了频繁的上下文切换<br>采用了非阻塞 I/O 多路复用机制</p>
@@ -274,7 +274,7 @@
         <p><span>本文标题:</span><a  href="/2019/07/22/为什么分布式一定要有Redis/">为什么分布式一定要有Redis?</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问 小善缘 的个人博客">小善缘</a></p>
         <p><span>发布时间:</span>2019年07月22日 - 22时43分</p>
-        <p><span>最后更新:</span>2019年07月22日 - 22时47分</p>
+        <p><span>最后更新:</span>2019年07月22日 - 23时16分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/22/为什么分布式一定要有Redis/" title="为什么分布式一定要有Redis?">https://xiaoshanyuan.github.io/2019/07/22/为什么分布式一定要有Redis/</a>
             <span class="copy-path" data-clipboard-text="原文: https://xiaoshanyuan.github.io/2019/07/22/为什么分布式一定要有Redis/　　作者: 小善缘" title=""></span>
