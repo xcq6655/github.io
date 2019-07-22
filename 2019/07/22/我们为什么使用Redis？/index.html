@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="小善缘">
 <meta property="og:description" content="如果你从来没使用过 Redis 数据库，那你肯定会问，为什么我们要用 Redis 数据库，我只使用 MySQL 或 Oracle 就够了。其实 Redis 虽叫数据库，可又不是传统意义上的关系型数据库，Redis 是一个高性能的 Key-value 数据库。 到了今天，Redis 已经进入了成熟期。数以千计的开发者都在开发和使用这个数据库，Redis 拥有非常完善的文档。大家知道，要想在几百万用户">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-22T14:16:30.602Z">
+<meta property="og:updated_time" content="2019-07-22T15:23:55.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我们为什么使用Redis？">
 <meta name="twitter:description" content="如果你从来没使用过 Redis 数据库，那你肯定会问，为什么我们要用 Redis 数据库，我只使用 MySQL 或 Oracle 就够了。其实 Redis 虽叫数据库，可又不是传统意义上的关系型数据库，Redis 是一个高性能的 Key-value 数据库。 到了今天，Redis 已经进入了成熟期。数以千计的开发者都在开发和使用这个数据库，Redis 拥有非常完善的文档。大家知道，要想在几百万用户">
@@ -215,11 +215,9 @@
           
         <p>如果你从来没使用过 Redis 数据库，那你肯定会问，为什么我们要用 Redis 数据库，我只使用 MySQL 或 Oracle 就够了。其实 Redis 虽叫数据库，可又不是传统意义上的关系型数据库，Redis 是一个高性能的 Key-value 数据库。</p>
 <p>到了今天，Redis 已经进入了成熟期。数以千计的开发者都在开发和使用这个数据库，Redis 拥有非常完善的文档。大家知道，要想在几百万用户中找到某条数据，是很难通过关系数据库在十几秒查询到的。于是我选择了 Redis，在不断优化后每次操作可以控制在 1 秒钟甚至更短，带给我相当大的震撼。</p>
-<p>1、认识 Redis</p>
-<p>在 Redis 之前，很多互联网公司会使用 MySql + Memcached 架构，这个架构虽然适合于海量数据存储，但随着业务的增加，会出现很多问题，例如，MySQL 数据库经常拆表，导致 Memcached 也不断扩容；同步问题；命中率低，导致直接穿透 Memcached 进入 DB 查询，DB资源池是有限的，进而宕机。这些问题都会导致 Memcached 其实并不好用。</p>
+<h4 id="1、认识-Redis"><a href="#1、认识-Redis" class="headerlink" title="1、认识 Redis"></a>1、认识 Redis</h4><p>在 Redis 之前，很多互联网公司会使用 MySql + Memcached 架构，这个架构虽然适合于海量数据存储，但随着业务的增加，会出现很多问题，例如，MySQL 数据库经常拆表，导致 Memcached 也不断扩容；同步问题；命中率低，导致直接穿透 Memcached 进入 DB 查询，DB资源池是有限的，进而宕机。这些问题都会导致 Memcached 其实并不好用。</p>
 <p>Redis 就在这种时代背景中产生，你会发现 Memcached 遇到的问题都被 Redis 给解决了。如果你用过 Memcached，你就会感受到 Redis 绝对不是简单的 Key-value 数据，还有 list、set、哈希等各种数据类型的存储，同时支持冷热备份和主从复制，不但解决了数据库的容错，还能轻易地将数据分布到多个 Redis 实例中。</p>
-<p>2、Redis 的八大特性</p>
-<p>特性一，速度极快。由于 Redis 是开源的，当你打开源代码，就会发现 Redis 都是用 C 语言写的，C 语言是最接近计算机语言的代码，而且只有区区 5 万行，保证了 Redis 的速度。同时一个 Redis 只是一个单线程，其真正的原因还是因为单线程在内存中是效率最高的。</p>
+<h4 id="2、Redis-的八大特性"><a href="#2、Redis-的八大特性" class="headerlink" title="2、Redis 的八大特性"></a>2、Redis 的八大特性</h4><p>特性一，速度极快。由于 Redis 是开源的，当你打开源代码，就会发现 Redis 都是用 C 语言写的，C 语言是最接近计算机语言的代码，而且只有区区 5 万行，保证了 Redis 的速度。同时一个 Redis 只是一个单线程，其真正的原因还是因为单线程在内存中是效率最高的。</p>
 <p>特性二，持久化。Redis 的持久化可以保证将内存中的数据每隔一段时间就保存于磁盘中，重启的时候会再次加载到内存。</p>
 <p>特性三，支持多种数据结构。分别支持哈希、集合、BitMaps，还有位图（多用于活跃用户数等统计）、HyperLogLog（超小内存唯一值计数，由于只有 12K，是有一定误差范围的）、GEO（地理信息定位）。</p>
 <p>特性四，支持多种编程语言。支持Java、PHP、Python、Ruby、Lua、Nodejs。</p>
@@ -227,8 +225,7 @@
 <p>特性六，简单。不依赖外部库、单线程、只有 23000 行 Code。</p>
 <p>特性七，主从复制。主节点的数据做副本，这是做高可用的基石。</p>
 <p>特性八，高可用和分布式。Redis-Sentinel（v2.8）支持高可用，Redis-Cluster（v3.0）支持分布式。</p>
-<p>3、那么 Redis 用在哪些场景呢?</p>
-<p>Redis 最大的作用是增加你原来的访问性能问题，试想如果项目已经搭建好，这个项目一般是不太可能更换的。但是 Redis 独特的存在是只需要增加一层，把常用的数据存放在 Redis 即可。</p>
+<h4 id="3、那么-Redis-用在哪些场景呢"><a href="#3、那么-Redis-用在哪些场景呢" class="headerlink" title="3、那么 Redis 用在哪些场景呢?"></a>3、那么 Redis 用在哪些场景呢?</h4><p>Redis 最大的作用是增加你原来的访问性能问题，试想如果项目已经搭建好，这个项目一般是不太可能更换的。但是 Redis 独特的存在是只需要增加一层，把常用的数据存放在 Redis 即可。</p>
 <p>无论是什么架构，你都可以将 Redis 融入项目中来，这可以解决很多关系数据库无法解决的问题。比如，现有数据库处理缓慢的任务，或者在原有的基础上开发新的功能，都可以使用 Redis。接下来，我们一起看看 Redis 的典型使用场景。</p>
 <ol>
 <li><p>缓存系统。这是 Redis 使用最多的场景。Redis 能够替代 Memcached，让你的缓存从只能存储数据变得能够更新数据，因此你不再需要每次都重新生成数据。网络中总是能够看到这个技术更新换代，Redis 的原生命令，尽管简单却功能强大，把它们加以组合，能完成的功能是无法想象的。</p>
@@ -256,7 +253,7 @@
         <p><span>本文标题:</span><a  href="/2019/07/22/我们为什么使用Redis？/">我们为什么使用Redis？</a></p>
         <p><span>文章作者:</span><a  href="/" title="访问 小善缘 的个人博客">小善缘</a></p>
         <p><span>发布时间:</span>2019年07月22日 - 22时14分</p>
-        <p><span>最后更新:</span>2019年07月22日 - 22时16分</p>
+        <p><span>最后更新:</span>2019年07月22日 - 23时23分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/07/22/我们为什么使用Redis？/" title="我们为什么使用Redis？">https://xiaoshanyuan.github.io/2019/07/22/我们为什么使用Redis？/</a>
             <span class="copy-path" data-clipboard-text="原文: https://xiaoshanyuan.github.io/2019/07/22/我们为什么使用Redis？/　　作者: 小善缘" title=""></span>
@@ -293,7 +290,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、认识-Redis"><span class="toc-number">1.</span> <span class="toc-text">1、认识 Redis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、Redis-的八大特性"><span class="toc-number">2.</span> <span class="toc-text">2、Redis 的八大特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、那么-Redis-用在哪些场景呢"><span class="toc-number">3.</span> <span class="toc-text">3、那么 Redis 用在哪些场景呢?</span></a></li></ol>
 </div>
 <style>
     .left-col .switch-btn {
